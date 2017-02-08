@@ -1,0 +1,7 @@
+html,
+body,
+ :global(#root) {
+  font-family: "-apple-system", "PingFang SC", "Hiragino Sans GB", "Arial", "Microsoft YaHei", "Helvetica Neue", "sans-serif";
+  color: #333;
+  font-size: 14px;
+}

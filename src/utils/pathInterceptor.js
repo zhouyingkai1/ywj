@@ -1,0 +1,15 @@
+/**
+ * 路径拦截器
+ * Created by MFChen on 21/12/2016.
+ */
+import constants from '../constants';
+
+export default {
+  request: (url) => {
+    //正则表达式含义： 排除后缀为.html | 排除前缀为http: https:
+    if (!/.+(?=\.html$)/.test(url) && !/^(?=(http\:|https\:)).*/.test(url)) {
+      url = constants.host + constants.path + url;
+    }
+    return url;
+  }
+};
