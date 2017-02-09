@@ -6,7 +6,10 @@ const Header = (props) => {
   const userInfo = JSON.parse(kits.getCookies('__zwUserInfo__') || '{}');
   return (
     <div className='header'>
-     this is header
+      <Link to={{ pathname: '/login', }} >
+              我的作品</Link>
+      <Link to={{ pathname: '/home', }} >
+              home</Link>
     </div>
   )
 }

@@ -1,0 +1,74 @@
+:global{
+  body{
+    background:#f3f3f3;
+  }
+  .login{
+    .main{
+      height:395px;
+      width:100%;
+      background:url('../../../assets/banner.jpg') no-repeat top center;
+      background-size:cover;
+      /*background:url(http://www.dreawer.com/images/bg.png) repeat top center;*/
+      position: relative;
+      &:before{
+        content:'';
+        display:table;
+      }
+      .logo{
+          width:261px;
+          height:94px;
+          background:url('../../../assets/logo-b.png') no-repeat ;
+          margin:100px auto 0;
+        }
+      .form{
+        min-height: 350px;
+        width:340px;
+        padding: 20px 50px 0;
+        background-color: #f9f9f9;
+        position: absolute;
+        top:270px;
+        left:50%;
+        margin-left:-170px;
+        border-radius:4px;
+        .login-form-button{
+          width:100%;
+        }
+        h3{
+          text-align:center;
+          color:#999;
+          margin-bottom:20px;
+          margin-top:10px;
+          font-weight: normal;
+          font-size:20px;
+        }
+        .go-register{
+          text-align: right;
+          font-size:12px;
+          margin-top:10px;
+          color:#6e6e6e;
+          span{
+            color:#0074e0;
+            cursor: pointer;
+          }
+        }
+      }
+      
+    }
+    .footer{
+        text-align: center;
+        margin-top:300px;
+        border-top:1px solid #d3d3d3;
+        padding-top:15px;
+        a{
+          display: inline-block;
+          border-right:1px solid #d3d3d3;
+          padding-right:10px;
+          margin-right:10px;
+          color:#666;
+          &:nth-last-child(1){
+            border:0;
+          }
+        }
+     }
+  }
+}

@@ -17,7 +17,9 @@ function loginSuccess(data) {
 }
 export default {
   namespace: 'login',
-  state: {},
+  state: {
+    status: 0,    //0登陆 1注册
+  },
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(location => {
@@ -51,5 +53,9 @@ export default {
       }
     }
   },
-  reducers: {}
+  reducers: {
+    updateState(state, action) {
+      return {...state, ...action.payload }
+    },
+  }
 }
