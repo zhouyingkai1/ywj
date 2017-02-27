@@ -15,6 +15,7 @@ export default {
   state: {
     loading: false,
     headerVisble: true,
+    footerVisble: true,
     modalVisible: false,
     registerVisible: false,
   },

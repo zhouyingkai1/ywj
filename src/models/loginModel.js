@@ -6,7 +6,7 @@ import {routerRedux} from 'dva/router';
 import {message} from 'antd'
 import Base64 from 'base-64'
 import kits from '../utils/kits'
-// import * as loginService from '../../services/loginServices'
+import * as loginServices from '../services/loginServices'
 
 /*登录成功之后相关cookie 存储*/
 function loginSuccess(data) {
@@ -37,20 +37,12 @@ export default {
   },
   effects: {
     *login({payload}, {put, call}){
-      const result = yield call(loginService.login, {
-        mobile: payload.userName,
-        password: payload.userPwd
+      console.log(payload,'payload')
+      const result = yield call(loginServices.login, {
+        loginName: payload.userName,
+        password: payload.passWord
       }, 1000)
-      if (~'000'.indexOf(result.code)) {
-        yield loginSuccess(result.data)
-        yield put(routerRedux.replace({pathname: '/main'}))
-      } else if (result.code == 'A001003') {
-        message.error('用户名或密码错误', 3)
-      } else if (result.code == 'A001002') {
-        message.error('用户名不存在', 3);
-      } else {
-        message.error('网络错误，请稍后重试', 3);
-      }
+      console.log(result,'result')
     }
   },
   reducers: {

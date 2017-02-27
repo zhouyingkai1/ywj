@@ -6,7 +6,6 @@ export default function ({history, app}) {
   const routes = [
     {
       name: 'ywj',
-      breadcrumbName: '前台展示',
       path: '/',
       // indexRoute: {
       //   onEnter: (nextState, replace) => replace('/zw/rules')
@@ -35,6 +34,16 @@ export default function ({history, app}) {
             require.ensure([], require => {
               app.model(require('./models/loginModel'))
               cb(null, require('./routes/login/login'))
+            });
+          }
+        },
+        {
+          name: 'select',
+          path: 'select',
+          getComponent({}, cb) {
+            require.ensure([], require => {
+              app.model(require('./models/selectModel'))
+              cb(null, require('./routes/select/Select'))
             });
           }
         },
