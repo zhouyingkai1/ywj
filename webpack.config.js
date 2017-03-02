@@ -41,24 +41,5 @@ module.exports = function (webpackConfig, env) {
       loader.test = /\.css$/;
     }
   });
-
-
-  webpackConfig.module.loaders.push({
-    test   : /\.woff/,
-    loader : 'url?prefix=font/&limit=10000&mimetype=application/font-woff'
-  })
-  webpackConfig.module.loaders.push({
-    test   : /\.ttf/,
-    loader : 'file?prefix=font/'
-  })
-  webpackConfig.module.loaders.push({
-    test   : /\.eot/,
-    loader : 'file?prefix=font/'
-  })
-  webpackConfig.module.loaders.push({
-    test   : /\.svg/,
-    loader : 'file?prefix=font/'
-  })
-  
   return webpackConfig;
 };

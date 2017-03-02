@@ -27,8 +27,8 @@ export default {
           dispatch({
             type: 'ywj/updateState',
             payload: {
-              headerVisble: false ,
-              footerVisble: false ,
+              headerVisible: false ,
+              footerVisible: false ,
             },
           })
         }

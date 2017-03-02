@@ -1,6 +1,3 @@
-/**
- * Created by MFChen on 22/12/2016.
- */
 import {message} from 'antd'
 // import kits from '../../utils/kits'
 
@@ -14,10 +11,11 @@ export default {
   namespace: 'ywj',
   state: {
     loading: false,
-    headerVisble: true,
-    footerVisble: true,
+    headerVisible: true,
+    footerVisible: true,
     modalVisible: false,
     registerVisible: false,
+    showLoginModal: false,
   },
   effects: {
     *login({
@@ -85,6 +83,7 @@ export default {
   reducers: {
     //更新处理 state 值,由传进来的参数决定
     updateState(state, {payload}){
+      console.log(payload,'ddd')
       return {...state, ...payload}
     },
     loginSuccess(state, action) {

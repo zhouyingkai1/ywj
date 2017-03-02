@@ -12,11 +12,11 @@ import Footer from '../components/layout/Footer.js'
 const Index = (props) => {
   return (
     <div>
-      {props.ywj.headerVisble?<Header/>:null}
+      {props.ywj.headerVisible?<Header {...props}/>:null}
       <div>
         {props.children}
       </div>
-       {props.ywj.footerVisble?<Footer/>:null}
+       {props.ywj.footerVisible?<Footer {...props}/>:null}
     </div>
   )
 }

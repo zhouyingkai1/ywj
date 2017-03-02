@@ -22,7 +22,7 @@ export default function ({history, app}) {
           path: 'home',
           getComponent({}, cb) {
             require.ensure([], require => {
-              // app.model(require('./models/loginModel'))
+              app.model(require('./models/homeModel'))
               cb(null, require('./routes/home/home'))
             });
           }
