@@ -83,7 +83,6 @@ export default {
   reducers: {
     //更新处理 state 值,由传进来的参数决定
     updateState(state, {payload}){
-      console.log(payload,'ddd')
       return {...state, ...payload}
     },
     loginSuccess(state, action) {

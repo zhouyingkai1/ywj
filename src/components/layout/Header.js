@@ -5,6 +5,7 @@ import styles from './style/header.less'
 import {Input, Form, Icon, Button,Message} from 'antd'
 const Search =Input.Search
 import isEmpty from 'lodash.isempty'
+import router from '../../router'
 const Header = (props) => {
   const userInfo = JSON.parse(kits.getCookies('__ywjUserInfo__') || '{}');
   const FormItem = Form.Item;
@@ -57,7 +58,7 @@ const Header = (props) => {
             : 
               <div className={styles.loginBtn}>
                 <span onClick={() =>openDialog(1)}>登录</span>
-                <span onClick={() => props.onUpdateState({ registerVisible: true })}>注册</span>
+                <span ><Link to={'/login?from=other'}>注册</Link></span>
               </div>}
           </div>
         </div>
