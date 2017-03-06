@@ -42,7 +42,6 @@ export default {
         loginName: payload.userName,
         password: payload.passWord
       }, 1000)
-      console.log(result,'result')
     }
   },
   reducers: {

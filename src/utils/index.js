@@ -2,7 +2,6 @@
  * Created by MFChen on 26/12/2016.
  */
 import config from './config'
-import menu from './menu'
 import unKnownMenu from './unKnownMenu'
 import {color} from './theme'
 
@@ -42,7 +41,6 @@ Date.prototype.format = function (format) {
 
 module.exports = {
   config,
-  menu,
   color,
   unKnownMenu
 }

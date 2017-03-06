@@ -75,7 +75,6 @@ export default {
       return {...state,tags}
     },
     update(state,{payload}){
-      console.log(payload,'ddddd')
       return {...state,...payload}
     }
   }

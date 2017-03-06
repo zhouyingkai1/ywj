@@ -19,6 +19,15 @@ export default function ({history, app}) {
       childRoutes: [
         {
           name: 'home',
+          path: 'home/:id',
+          getComponent({}, cb) {
+            require.ensure([], require => {
+              app.model(require('./models/homeModel'))
+              cb(null, require('./routes/home/home'))
+            });
+          }
+        },{
+          name: 'home',
           path: 'home',
           getComponent({}, cb) {
             require.ensure([], require => {

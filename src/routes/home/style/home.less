@@ -26,6 +26,13 @@
       height:100%;
       border-radius:6px;
     }
+    &.noBanner{
+      height:0;
+      margin-bottom:0;
+      i{
+        display: none;
+      }
+    }
   }
   .main{
     width:1000px;
@@ -38,7 +45,14 @@
     .left{
       float:left;
       width:160px;
+      min-height:100px;
       padding:0 20px 0 0;
+      user-select: none;
+      .fixed{
+        position: fixed;
+        top:70px;
+        width:140px;
+      }
       .categroy{
         &.act{
           p{
@@ -82,6 +96,94 @@
     }
     .right{
       float:left;
+      background: #fff;
+      width:840px;
+      /*顶部*/
+      .sort{
+        padding: 0 25px;
+        width: 100%;
+        border-bottom: 1px solid #f1f1f1;
+        height:45px;
+        user-select: none;
+        .mainSort{
+          position: relative;
+          font-size: 14px;
+          cursor: pointer;
+          line-height: 45px;
+          span{
+            color: #2b445d;
+            opacity: .4;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+            display: block;
+            margin-right:30px;
+            position: relative;
+            float:left;
+            &:hover{
+              opacity: 1;
+              color: #007fff;
+            }
+            &:after{
+              content:'';
+              position: absolute;
+              border-right:1px solid #2b445d;
+              height:14px;
+              right:-15px;
+              top:15px;
+            }
+            &:nth-last-child(1){
+              &:after{
+                border:0;
+              }
+            }
+            &.act{
+              font-weight: 700;
+              color: #007fff;
+              opacity: 1;
+              &:after{
+                 opacity: 0.4;
+              }
+            }
+          }
+        }
+        .histroy{
+          float:right;
+          height:45px;
+          line-height: 45px;
+          span{
+            color: #2b445d;
+            opacity: .4;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+            display: block;
+            margin-right:30px;
+            position: relative;
+            cursor:pointer;
+            float:left;
+            &:nth-last-child(1){
+              margin:0;
+            }
+            &:hover{
+              color: #007fff;
+              opacity: 1;
+            }
+            &.act{
+              font-weight: 700;
+              color: #007fff;
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      /*列表*/
+      .itemList{
+        padding:20px 0;
+      }
+      .pagination{
+        margin:20px auto;
+        display: table;
+      }
     }
   }
 }
