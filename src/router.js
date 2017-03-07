@@ -56,6 +56,16 @@ export default function ({history, app}) {
             });
           }
         },
+        {
+          name: 'artcleDetail',
+          path: 'detail/:id',
+          getComponent({}, cb) {
+            require.ensure([], require => {
+              app.model(require('./models/detailModel'))
+              cb(null, require('./routes/artcleDetail/ArtcleDetail'))
+            });
+          }
+        },
       ]
     }
   ];

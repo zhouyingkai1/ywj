@@ -87,13 +87,13 @@ const Home = (props) => {
   return (
     <div >
       <div className={styles.home}>
-         <div className={props.home.haveBanner?styles.banner:styles.banner +' '+styles.noBanner} >  
-            <img src={require('../../assets/banner.jpg')} alt=""/>
+         <div className={props.home.haveBanner?styles.banner:styles.banner +' '+styles.noBanner}  >  
+            <img src={'http://img1.timeface.cn/story/c141b4de167069ba82156c78bbab854f.jpg'} alt=""/>
             <Icon type="close-circle" onClick={(e)=>bannerClose(e)}/>
          </div>
          <div className={styles.main}>
            <div className={styles.left}>
-             <ul className={props.home.cateFiexd?styles.fixed:''}>
+             <ul className={props.home.cateFiexd?(props.home.haveBanner?styles.fixed + ' ' +styles.fix:styles.fixed):''}>
                <li className={props.home.bigCate == 1?styles.categroy +' ' +styles.act:styles.categroy}>
                  <p onClick={()=>changeBigCate(1)}>一级</p>
                  <ul >

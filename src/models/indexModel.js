@@ -1,4 +1,5 @@
 import {message} from 'antd'
+import {routerRedux} from 'dva/router'
 // import kits from '../../utils/kits'
 
 function loginSuccess(data) {
@@ -16,6 +17,15 @@ export default {
     modalVisible: false,
     registerVisible: false,
     showLoginModal: false,
+  },
+  subscriptions:{
+    setup({history,dispatch}){
+      history.listen((location)=>{
+        if(location.pathname == '/'){
+         dispatch(routerRedux.push('/home'))
+        }
+      })
+    }
   },
   effects: {
     *login({

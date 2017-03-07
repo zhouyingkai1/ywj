@@ -11,6 +11,9 @@ const ArtcleItem = (props) => {
       payload:id
     })
   }
+  const goDetail = (id)=>{
+    props.dispatch(routerRedux.push('/detail/'+id))
+  }
   const item = props.home.artcleList.map((item,index)=>{
     let dateStr = new Date().valueOf() + ''
     let date = (dateStr.substring(0,dateStr.length-3) - item.createTime)/60
@@ -26,9 +29,11 @@ const ArtcleItem = (props) => {
     }    
     return(
         <div key={index} className={styles.item}>
-          <div className={styles.shortImg} style={{backgroundImage:'url('+item.shortImg+') '}}></div>
+          <div className={styles.shortImg} style={{backgroundImage:'url('+item.shortImg+') '}}>
+            <a target='_blank' href={item.url} style={{display:'block',position:'relative',zIndex:'3',height:'100%'}}></a>
+          </div>
           <div className={styles.itemMain}>
-            <h2><Link to={'/'}>{item.title}</Link></h2>
+            <h2><a target='_blank' href={item.url}>{item.title}</a></h2>
             <div className={styles.time}>{day}</div>
             <div className={styles.infoBox}>
               <div className={styles.itemLeft}>
@@ -36,7 +41,7 @@ const ArtcleItem = (props) => {
                   <Icon type="heart" />
                   <span>{item.like>0?item.like:''}</span>
                 </div>
-                <div className={styles.mess}>
+                <div className={styles.mess} onClick={()=>goDetail(item.id)}>
                   <Icon type="message" />
                   <span>{item.message>0?item.message:''}</span>
                 </div>

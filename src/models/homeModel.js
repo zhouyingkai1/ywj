@@ -42,6 +42,7 @@ export default {
          id:14,
          title:'测试名称这个很长的名称',
          createTime:'1488782302',
+         url:'http://baidu.com',
          user:{
            name:'周英凯',
            avotar:'https://user-gold-cdn.xitu.io/2016/11/29/40f695879c4acce775aba0046bde0bc7?imageView2/1/w/50/h/50/q/85/format/jpg/interlace/1',
@@ -68,6 +69,7 @@ export default {
        },{
          id:15,
          title:'测试名称',
+         url:'http://baidu.com',
          createTime:'1488556800',
          user:{
            name:'周英凯',
@@ -95,6 +97,7 @@ export default {
        },{
          id:17,
          title:'测试名称',
+         url:'http://baidu.com',
          createTime:'1486137600',
          user:{
            name:'周英凯',
@@ -122,6 +125,7 @@ export default {
        },{
          id:37,
          title:'测试名称',
+         url:'http://baidu.com',
          createTime:'1486137600',
          user:{
            name:'周英凯',
