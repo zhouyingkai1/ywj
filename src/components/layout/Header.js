@@ -21,7 +21,7 @@ const Header = (props) => {
       <div className={styles.header}>
         <div className={styles.headerMain}>
           <div className={styles.logo}>
-            <a href='/'><img src={require('../../assets/logo-m.png')} alt=""/></a>
+            <a href='/'><img src={require('../../assets/logo-m2.png')} alt=""/></a>
           </div>
           <div className={styles.search}>
             <Search placeholder="搜索真的可以用 我不骗你"/>
