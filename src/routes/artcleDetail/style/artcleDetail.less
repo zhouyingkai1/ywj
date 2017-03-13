@@ -15,7 +15,6 @@
     height: 180px;
     .topBg{
        background-color: rgba(0, 127, 255, 0.41);
-       filter: blur(1px);
        top:0;
        left:0;
        position: absolute;
@@ -50,6 +49,7 @@
       }
       .info{
         margin-top:10px;
+        user-select: none;
         a,.like,.report{
           display: inline-block;
           margin-right:20px;
@@ -131,6 +131,9 @@
           color:#fff;
           i{
             margin-right:5px;
+          }
+          &:hover{
+            background: rgba(255,255,255,.1);
           }
         }
       }
