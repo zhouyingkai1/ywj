@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react'
 import {Link} from 'dva/router'
 import {Input, Form, Icon, Button,Message} from 'antd'
 const Login = (props) => {
-  console.log(props,'rrr')
   const FormItem = Form.Item;
   const {getFieldDecorator} = props.form
   const handleSubmit = (e)=> {

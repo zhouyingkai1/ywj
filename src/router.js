@@ -66,6 +66,16 @@ export default function ({history, app}) {
             });
           }
         },
+        {
+          name: 'submit',
+          path: 'submit',
+          getComponent({}, cb) {
+            require.ensure([], require => {
+              app.model(require('./models/submitModel'))
+              cb(null, require('./routes/submit/Submit'))
+            });
+          }
+        },
       ]
     }
   ];

@@ -6,6 +6,7 @@ import {Input,  Icon, Button,Message} from 'antd'
 const Search =Input.Search
 import isEmpty from 'lodash.isempty'
 import Login from './Login'
+import {routerRedux} from 'dva/router'
 const Header = (props) => {
   const userInfo = JSON.parse(kits.getCookies('__ywjUserInfo__') || '{}');
   const openDialog = (type)=>{
@@ -27,7 +28,8 @@ const Header = (props) => {
             <Search placeholder="搜索真的可以用 我不骗你"/>
           </div>
           <div className={styles.txt}>
-            <span>上传内容</span>
+            <span><a href="/#/submit" target='_blank'>上传内容</a></span>
+            <span onClick={()=>props.dispatch(routerRedux.push('/home'))}>首页</span>
           </div>
           <div className={styles.user}>
             {!isEmpty(userInfo) && kits.getCookies('ywj-uid') && kits.getCookies('ywj-token') ?
