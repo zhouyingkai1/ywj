@@ -10,10 +10,17 @@ const Login = (props) => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        props.dispatch({
-          type: 'login/login',
-          payload:{...values}
-        })
+       if(!props.login.status){
+          props.dispatch({
+            type: 'login/login',
+            payload:{...values}
+          })
+       }else{
+          props.dispatch({
+            type: 'login/register',
+            payload:{...values}
+          })
+       }
       }
     });
   } 
@@ -27,7 +34,8 @@ const Login = (props) => {
   }
   let classNames ='' ;
   if(props.login.status){
-    classNames += 'bg'+ ' '+'scale'
+    // classNames += 'bg'+ ' '+'scale'
+    classNames += 'bg'
   }else{
     classNames ='bg'
   }
@@ -41,7 +49,7 @@ const Login = (props) => {
             <div className='form'>
               <div className={classNames} ></div>
               <div className='mainbg'>
-                <h3>{props.login.status==0?'登录':'注册'}</h3>
+                <h3>{props.login.status==0?'用户登录':'用户注册'}</h3>
                 {props.login.status==0?
                   <div>
                     <Form onSubmit={(e)=>handleSubmit(e)} className="login-form">
@@ -56,9 +64,10 @@ const Login = (props) => {
                         {getFieldDecorator('passWord', {
                           rules: [{ required: true, message: '请输入正确的密码' }],
                         })(
-                          <Input addonBefore={<Icon type="lock" />} placeholder="请输入密码" />
+                          <Input type='password' addonBefore={<Icon type="lock" />} placeholder="请输入密码" />
                         )}
                       </FormItem>
+                      <a href="javascript:" onClick={()=>{Message.info('请联系管理员')}}>忘记密码</a>
                       <Button type="primary" htmlType="submit"  className="login-form-button">
                         登 录
                       </Button>
@@ -79,7 +88,7 @@ const Login = (props) => {
                         {getFieldDecorator('passWord', {
                           rules: [{ required: true, message: '请输入正确的密码' }],
                         })(
-                          <Input addonBefore={<Icon type="lock" />} placeholder="请输入密码" />
+                          <Input type='password' addonBefore={<Icon type="lock" />} placeholder="请输入密码" />
                         )}
                       </FormItem>
                       <Button type="primary" htmlType="submit"  className="login-form-button">

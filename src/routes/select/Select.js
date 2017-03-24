@@ -6,7 +6,6 @@ import styles from './styles/select.less'
 
 const Select = (props)=>{
   const {select} = props
-  console.log(select,'dd')
   const clickLike = (id)=>{
     props.dispatch({
       type:'select/updateState',
@@ -28,6 +27,14 @@ const Select = (props)=>{
       }
     })
   }
+  const addUserItems = ()=>{
+    props.dispatch({
+      type:'select/addUserItems',
+      payload:{
+        itemArr: select.liked
+      }
+    })
+  } 
   const tagList = select.tags.map((item,index)=>{
     return(
       <div key={index} className={styles.item}>
@@ -49,7 +56,7 @@ const Select = (props)=>{
           {tagList}
         </div>
         <div className={styles.next}>
-          <Button size={'large'} type='primary' disabled={select.liked.length>0?false:true}>完成</Button>
+          <Button size={'large'} onClick={()=>addUserItems()} type='primary' disabled={select.liked.length>0?false:true}>进入主页</Button>
         </div>
       </div>  
     )

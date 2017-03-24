@@ -14,7 +14,7 @@ const ArtcleItem = (props) => {
  
   const item = props.home.artcleList.map((item,index)=>{
     let dateStr = new Date().valueOf() + ''
-    let date = (dateStr.substring(0,dateStr.length-3) - item.createTime)/60
+    let date = (dateStr.substring(0,dateStr.length-3) - (item.createTime-28800))/60
     let day = '';
     if(date<=60){
       day = '刚刚'
@@ -24,15 +24,20 @@ const ArtcleItem = (props) => {
       day = parseInt(date/1440) + '天前'
     }else{
       day = moment(Number(item.createTime + '000')).format('YYYY-MM-DD')
-    }    
+    } 
+    const goDetail = (event,id)=>{
+       if(/div/.test(event.target.id)){
+         console.log('详情') 
+       }
+    }   
     return(
-        <div key={index} className={styles.item}>
+        <div key={index}  className={styles.item} >
           <div className={styles.shortImg} style={{backgroundImage:'url('+item.shortImg+') '}}>
             <a target='_blank' href={item.url} style={{display:'block',position:'relative',zIndex:'3',height:'100%'}}></a>
           </div>
-          <div className={styles.itemMain}>
+          <div className={styles.itemMain} id={'div' + index} onClick={(event)=>goDetail(event,item.id)}>
             <h2><a target='_blank' href={item.url}>{item.title}</a></h2>
-            <div className={styles.time}>{day}</div>
+            <div className={styles.time}>{day}发布</div>
             <div className={styles.infoBox}>
               <div className={styles.itemLeft}>
                 <div className={item.isLike?styles.like+' '+styles.act:styles.like} onClick={()=>clickHeart(item.id)}>
@@ -45,7 +50,7 @@ const ArtcleItem = (props) => {
                     <span>{item.message>0?item.message:''}</span>
                   </a>
                 </div>
-              </div>
+              </div>  
               <div className={styles.itemRight}>
                 <div className={styles.tags}>
                   <Icon type="tags-o" />
@@ -56,7 +61,7 @@ const ArtcleItem = (props) => {
                   })}
                 </div> 
                 <div className={styles.avotar}>
-                  <img src={item.user.avotar} alt=""/>
+                  <img src={item.user.avator} alt=""/>
                 </div>
               </div>
             </div>

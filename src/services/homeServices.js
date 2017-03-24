@@ -1,7 +1,7 @@
 import request from '../utils/request';
 
-export async function login(params) {
-  return request('/login/login.php', {
+export async function artcleList(params) {
+  return request('/main/getArtcleList.php', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -10,8 +10,8 @@ export async function login(params) {
     body: JSON.stringify(params),
   })
 }
-export async function register(params) {
-  return request('/login/register.php', {
+export async function likeArtcle(params) {
+  return request('/main/likeArtcle.php', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

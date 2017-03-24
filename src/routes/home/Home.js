@@ -6,8 +6,9 @@ import {Link} from 'dva/router'
 import { routerRedux } from 'dva/router';
 import moment from 'moment'
 import {ArtcleItem} from '../../components'
+import kits from '../../utils/kits'
 const Home = (props) => {
-  const {categroy,categroyId,allCate} = props.home
+  const {categroy,categroyId,allCate,pagination} = props.home
   window.onscroll = ()=>{
     let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
     let cateFiexd = false
@@ -27,6 +28,7 @@ const Home = (props) => {
       }
     }) 
   }
+  /*切换分类 */
   const changeCategroy = (id)=>{
     props.dispatch({
       type:'home/updateState',
@@ -50,6 +52,7 @@ const Home = (props) => {
       }
     })
   }
+  /*侧边栏 */
   const allCateHtml = allCate.map((item,index)=>{
     return (
       <li key={index} onClick={()=>changeAllCate(item.id)} className={props.home.allCateId == item.id ?styles.categroy+' '+styles.curr:styles.categroy}>
@@ -57,6 +60,7 @@ const Home = (props) => {
       </li>
     )
   })
+  /**侧边栏 切换大的分类 */
   const changeBigCate = (type)=>{
     // props.dispatch(routerRedux.push('/home/dd'))
     props.dispatch({
@@ -66,7 +70,9 @@ const Home = (props) => {
       }
     })
   }
+  /*改变排序方式 */
   const changeSort = (type)=>{
+    document.cookie = 'ywj-sort =' + type
     props.dispatch({
       type:'home/updateState',
       payload:{
@@ -74,7 +80,7 @@ const Home = (props) => {
       }
     })
   }
-  
+  /*关闭banner广告 */
   const bannerClose = (e)=>{
     props.dispatch({
       type:'home/updateState',
@@ -83,7 +89,17 @@ const Home = (props) => {
       }
     })
   }
-  
+  const changePage = (page)=>{
+    //将页码保存在cookies中，当前页面刷新留在当前页
+    document.cookie = 'currPage =' + page
+    props.dispatch({
+      type:'home/changePage',
+      payload:{
+        current: page
+      }
+    })
+  }
+
   return (
     <div >
       <div className={styles.home}>
@@ -111,16 +127,16 @@ const Home = (props) => {
            <div className={styles.right}>
              <div className={styles.sort}>
                <div className={styles.mainSort}>
-                 <span className={props.home.sort == 'hot'?styles.act:''} onClick={()=>changeSort('hot')}>最热</span> 
-                 <span className={props.home.sort == 'new'?styles.act:''} onClick={()=>changeSort('new')}>最新</span> 
+                 <span className={props.home.sort == 0?styles.act:''} onClick={()=>changeSort(0)}>最热</span> 
+                 <span className={props.home.sort == 1?styles.act:''} onClick={()=>changeSort(1)}>最新</span> 
                </div>
                <div className={styles.histroy}>
-                  <span className={props.home.sort == 'week'?styles.act:''} onClick={()=>changeSort('week')}>一周最热</span>
-                  <span className={props.home.sort == 'month'?styles.act:''} onClick={()=>changeSort('month')}>一月最热</span>
+                  <span className={props.home.sort == 2?styles.act:''} onClick={()=>changeSort(2)}>一周最热</span>
+                  <span className={props.home.sort == 3?styles.act:''} onClick={()=>changeSort(3)}>一月最热</span>
                </div>
              </div>
              <ArtcleItem {...props}/>
-             <Pagination defaultCurrent={1} pageSize={15} total={500} className={styles.pagination} />
+             <Pagination defaultCurrent={1} current={props.home.current} onChange={(page)=>{changePage(page)}} pageSize={10} total={pagination.total} className={styles.pagination} />
            </div>
          </div>
       </div>

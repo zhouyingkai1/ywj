@@ -1,5 +1,5 @@
 const webpack = require('atool-build/lib/webpack');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = function (webpackConfig, env) {
   webpackConfig.babel.plugins.push('transform-runtime');
   //babel-plugin-import 是用来按需加载 antd 的脚本和样式的
@@ -8,6 +8,11 @@ module.exports = function (webpackConfig, env) {
     style: 'css',
   }]);
 
+  webpackConfig.plugins.push(
+    new CopyWebpackPlugin([
+        { from: __dirname+'/src/favicon.ico', to: 'favicon.ico' },
+    ])
+  )
   // Support hmr
   if (env === 'development') {
     webpackConfig.devtool = '#eval';
@@ -20,7 +25,7 @@ module.exports = function (webpackConfig, env) {
   webpackConfig.plugins = webpackConfig.plugins.filter(function (plugin) {
     return !(plugin instanceof webpack.optimize.CommonsChunkPlugin);
   });
-
+  
   // Support CSS Modules
   // Parse all less files as css module.
   webpackConfig.module.loaders.forEach(function (loader, index) {

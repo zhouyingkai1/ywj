@@ -1,7 +1,8 @@
+import * as submitService from '../services/submitServices'
 export default{
   namespace:'submit',
   state:{
-    tags:[
+    items:[
       {
         id:1,
         title:'前端'
@@ -19,7 +20,26 @@ export default{
         title:'产品'
       },
     ],
-    selectTag:3
+    tags:[
+      {
+        id:1,
+        title:'搞笑'
+      },
+      {
+        id:2,
+        title:'教程'
+      },
+      {
+        id:3,
+        title:'论坛'
+      },
+      {
+        id:4,
+        title:'主播'
+      },
+    ],
+    selectItem:'',
+    selectTag:''
   },
   subscriptions:{
     setup({dispatch,history}) {
@@ -37,7 +57,12 @@ export default{
     }
   },
   effects:{
-
+    *submitArtcle({payload},{call,put}){
+      const result = yield call(submitService.submit,{...payload})
+      if(result.code == '000'){
+        
+      }
+    },
   },
   reducers:{
     updateState(state,{payload}){

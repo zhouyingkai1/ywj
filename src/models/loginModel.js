@@ -11,9 +11,8 @@ import * as loginServices from '../services/loginServices'
 /*登录成功之后相关cookie 存储*/
 function loginSuccess(data) {
   message.success('登录成功')
-  kits.setCookies('zw-token', data.token)
-  kits.setCookies('zw-uid', data.userInfo.id)
-  kits.setCookies('userType', data.userInfo.roleId)
+  kits.setCookies('ywj-uid', data.id)
+  kits.setCookies('ywjUser', JSON.stringify(data))
 }
 export default {
   namespace: 'login',
@@ -37,11 +36,38 @@ export default {
   },
   effects: {
     *login({payload}, {put, call}){
-      console.log(payload,'payload')
       const result = yield call(loginServices.login, {
         loginName: payload.userName,
         password: payload.passWord
       }, 1000)
+      if(result.code == '000'){
+        loginSuccess(result.data)
+        if(result.haveLike){
+           yield put(routerRedux.replace({pathname: '/home'}))
+        }else{
+           yield put(routerRedux.replace({pathname: '/select'}))
+        }
+       
+      }else{
+        message.error("用户名或密码错误")
+      }
+    },
+    *register({payload},{put,call}){
+      const result = yield call(loginServices.register,{
+        loginName: payload.userName,
+        password: payload.passWord,
+      })
+      if(result.code == '000'){
+        message.success('注册成功,立即登录',3.5)
+        yield put({
+          type:'updateState',
+          payload:{
+            status: 0
+          }
+        })
+      }else{
+        message.error('用户已存在')  
+      }
     }
   },
   reducers: {

@@ -1,4 +1,7 @@
 import fetch from 'dva/fetch';
+import 'fetch-detector'
+import 'fetch-ie8'
+require('es6-promise').polyfill();
 import pathInterceptor from './pathInterceptor';
 import tokenInterceptor from './tokenInterceptor';
 import $ from 'jquery'
@@ -10,7 +13,6 @@ function parseJSON(response) {
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
-    console.log(22)
     return response;
   }
 
@@ -39,27 +41,28 @@ function handleError(error) {
  */
 export default function request(url, options) {
   url  = /http:\\/.test(url) ? url : pathInterceptor.request(url)
-//  return fetch(url)
-  //  .then(checkStatus)
-  //   .then(!~'headHEAD'.indexOf(options)&&parseJSON)
-  //   .then((data) => data)
-  //   .catch((err) => handleError(err));
-  // // console.log(options,'ss')
-  $.ajax({
-    url: url,
-    method: 'POST',
-    data: options.body,
-    headers:{
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    dataType: 'json',
-    success (data) {
-      console.log(data)
-      return data 
-    },
-    error(err){
-      return err 
-    }
-  })
+  // return fetch(url)
+  //   .then(checkStatus)
+  //     .then(!~'headHEAD'.indexOf(options.method)&&parseJSON)
+  //     .then((data) => data)
+  //     .catch((err) => handleError(err));
+    // console.log(options,'ss')
+    return(
+      $.ajax({
+        url: url,
+        method: 'POST',
+        data: options.body,
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        dataType: 'json',
+        success (data){
+            return data
+        },
+        error(err){
+          return err 
+        }
+      })
+    )
 }
