@@ -80,6 +80,81 @@
           }
         }
       }
+      .userInfo{
+        width:160px;
+        position: relative;
+        top:2px;
+        height:48px;
+        width:70px;
+        .avator{
+          &:after{
+            content:'';
+            display: block;
+            clear:both;
+          }
+          p{
+            width:36px;
+            height:36px;
+            border-radius: 50%;
+            overflow: hidden;
+            float:right;
+            img{
+              width:100%;
+              height:100%;
+            }
+          }
+          i{
+            font-style: normal;
+            margin-right:10px;
+            position: relative;
+            top:8px;
+            font-size:16px;
+            color:#333;
+            float:right;
+           }
+        }
+        &:hover{
+          .menu{
+            display: block;
+          }
+        }
+        .menu{
+          display: none;
+          position: absolute;
+          top: 48px;
+          right:0;
+          margin: 0;
+          padding: 0;
+          width:160px;
+          background-color: #fff;
+          box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+          border: 1px solid hsla(217,5%,71%,.45);
+          border-radius: 4px;
+          font-size: 16px;
+          ul{
+            li{
+              cursor:pointer;
+              line-height: 40px;
+              color:#71777c;
+              padding:0 20px;
+              i{
+                margin-right:10px;
+              }
+              a{
+                color: #71777c;
+              }
+              &:hover,&.act{
+                background-color: hsla(0,0%,95%,.5);
+                color:#333;
+                a{
+                  color:#333;
+                }
+              }
+
+            }
+          }
+        }
+      }
     }
   }
  }
@@ -119,9 +194,9 @@
         box-shadow: 0 5px 25px rgba(0,0,0,0.4);
         background: #fff;
         .modalLogo{
-          width:230px;
+          width:153px;
           height:60px;
-          background: url('../../../assets/banner.jpg') no-repeat;
+          background: url('../../../assets/ywj.png') no-repeat;
           background-size:100% 100%;
           margin:0 auto 20px;
         }

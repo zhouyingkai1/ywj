@@ -30,6 +30,14 @@ export default {
               footerVisible: false ,
             },
           })
+          if(/from/.test(location.search)){
+            dispatch({
+              type:'updateState',
+              payload:{
+                status: 1
+              }
+            })
+          }
         }
       })
     },

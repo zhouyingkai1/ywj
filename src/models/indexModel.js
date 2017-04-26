@@ -1,11 +1,13 @@
 import {message} from 'antd'
 import {routerRedux} from 'dva/router'
-// import kits from '../../utils/kits'
+import kits from '../utils/kits'
+import * as loginServices from '../services/loginServices'
 
+/*登录成功之后相关cookie 存储*/
 function loginSuccess(data) {
-  kits.setCookies('tf-token', data.token)
-  kits.setCookies('tf-uid', data.userInfo.uid)
-  kits.setCookies('__zwUserInfo__', JSON.stringify(data.userInfo))
+  message.success('登录成功')
+  kits.setCookies('ywj-uid', data.id)
+  kits.setCookies('ywjUser', JSON.stringify(data))
 }
 
 export default {
@@ -28,101 +30,29 @@ export default {
     }
   },
   effects: {
-    *login({
-      payload
-    }, {call, put}) {
-      yield put({type: 'showHideLoading'})
-      const result = yield call(login, payload)
-      if (result.code == '000') {
+    *login({payload}, {put, call}){
+      const result = yield call(loginServices.login, {
+        loginName: payload.userName,
+        password: payload.passWord
+      }, 1000)
+      if(result.code == '000'){
         loginSuccess(result.data)
         yield put({
-          type: 'loginSuccess'
-        })
-      } else {
-        if (result.code == 'A001003') {
-          message.error('密码错误')
-        } else if (result.code == 'A001002') {
-          message.error('账户不存在')
-        } else {
-          message.error('网络错误，请稍后重试')
-        }
-        yield put({type: 'loginFail'})
-      }
-    },
-    *register({
-      payload
-    }, {call, put}) {
-      yield put({type: 'showHideLoading'})
-      const result = yield call(register, payload)
-      if (result.code == '000') {
-        loginSuccess(result.data)
-        yield put({
-          type: 'loginSuccess'
+          type:'updateState',
+          payload:{
+            showLoginModal: false
+          }
         })
         window.location.reload()
-      } else {
-        if (result.code == 'valcode_is_error') {
-          message.error('注册码错误')
-        } else if (result.code == 'A001004') {
-          message.error('账户已存在')
-        } else {
-          message.error('网络错误，请稍后重试')
-        }
-        yield put({type: 'loginFail'})
+      }else{
+        message.error("用户名或密码错误")
       }
     },
-    *loginOut({}, {put}){
-      kits.setCookies('tf-token', '')
-      kits.setCookies('tf-uid', '')
-      kits.setCookies('__zwUserInfo__', JSON.stringify({}))
-      yield put({
-        type: 'updateState'
-      })
-      window.location.reload()
-    },
-    *captcha({
-      payload
-    }, {call}) {
-      const result = yield call(captcha, payload)
-      if (result.code != '000') {
-        message.error('网络错误，请稍后重试')
-      }
-    },
-
   },
   reducers: {
     //更新处理 state 值,由传进来的参数决定
     updateState(state, {payload}){
       return {...state, ...payload}
-    },
-    loginSuccess(state, action) {
-      return {
-        ...state,
-        ...action.payload,
-        modalVisible: false,
-        registerVisible: false,
-        loading: false
-      }
-    },
-    logoutSuccess(state){
-      return {
-        ...state,
-        modalVisible: false,
-        registerVisible: false,
-        loading: false
-      }
-    },
-    loginFail(state) {
-      return {
-        ...state,
-        loading: false,
-      }
-    },
-    showHideLoading(state) {
-      return {
-        ...state,
-        loading: !state.loading
-      }
     },
   }
 }

@@ -1,293 +1,50 @@
+import * as artcleDetailServices from '../services/artcleDetailServices'
+import * as commonServices from '../services/commonServices'
+import {likeArtcle,likeComment} from '../services/homeServices'
+import kits from '../utils/kits'
+import {routerRedux} from 'dva/router'
+import {Message} from 'antd'
 export default{
   namespace: 'detail',
   state:{
     artcleDetail:{
-      id:14,
+      id: ' ',
       isLike:false,
-      title:'风吹画廊人如玉',
-      url:'http://baidu.com',
-      like:10,
+      title:' ',
+      url:' ',
+      like:0,
       tags:[
         {
           id:10,
           title:'前端',
           url:'frontend'
-        },{
-          id:12,
-          title:'后台',
-          url:'backend'
-        },{
-          id:13,
-          title:'设计',
-          url:'design'
         }
       ],
-      shortImg:'https://dn-mhke0kuv.qbox.me/13f969888162372b4034.png?imageView/2/w/800/h/400/q/100/format/png',  
+      shortImg:' ',  
       createTime: 1488782302,
-      desc:'在 vue 里，组件之间的作用域是独立的，父组件跟子组件之间的通讯可以通过 prop 属性来传参，但是在兄弟组件之间通讯就比较麻烦了。vuex 正是为了解决这个问题，让多个子组件之间可以方便的通讯。'
+      desc:' ',
+      user:{},
     },
-    comment:[
-      {
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-        userName: 'lucky',
-        comment:'组件之间的作用域是独立的',
-        createTime: 1488788302,
-      },
-      {
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-        userName: '大漠孤烟',
-        comment:'父组件跟子组件之间的通讯可以通过 prop 属性来传参',
-        createTime: 1489788302,
-      }
-    ],
+    comment:{
+      data:[]
+    },
+    currentPage: 1,
     about:[
       {
-        title:'前端面试季 - 12家公司面试题全揭秘',
-        url:'https://juejin.im/post/58d088045c497d0057d1c40d',
-        like:30,
-        userName:'MR_LP'
-      },
-      {
-        title:'80% 应聘者都不及格的 JS 面试题',
-        url:'https://juejin.im/post/58d088045c497d0057d1c40d',
-        like:30,
-        userName:'MR_LP'
-      },
-      {
-        title:'React Native 详细实现热部署、增量差异化热更新',
-        url:'https://juejin.im/post/58d088045c497d0057d1c40d',
+        title:' ',
+        url:' ',
         like:0,
-        userName:'江清清'
+        userName:' '
       },
     ],
     likedUser:[
       {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
+        id: ' ',
+        userName:' ',
+        avator:' ',
       },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/a15f275512a44b0959c3.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-      {
-        id:12,
-        userName:'你好',
-        avator:'https://dn-mhke0kuv.qbox.me/6250137bdccb5d9575ff.jpg?imageView2/1/w/100/h/100/q/85/interlace/1',
-      },
-
-    ]
+    ],
+    commentPic: ''
   },
   subscriptions:{
     setup({dispatch,history}){
@@ -300,15 +57,133 @@ export default{
               headerVisible:true,
             }
           })
+          dispatch({
+            type:'query',
+            payload:{
+              id:location.query.id
+            }
+          })
         }
       })
     }
   },
   effects:{
+    *query({payload},{call,put}){
+      const result = yield call(artcleDetailServices.queryArtcleById,{
+        userId: kits.getCookies('ywj-uid'),
+        artcleId: payload.id
+      })
+      if(result.code == '000'){
+        yield put({
+          type: 'updateState',
+          payload:{
+            artcleDetail: result.data
+          }
+        })
+        const aboutList = yield call(artcleDetailServices.queryAboutArtcle,{
+          tags: result.data.tags[0].id
+        })
+        yield put({
+          type: 'updateState',
+          payload:{
+            about: aboutList.data
+          }
+        })
+      }
+      yield put({
+        type:'queryLikeList',
+        payload:{
+          id: payload.id
+        }
+      })
+      yield put({
+        type:'getComment',
+        payload:{
+          artcleId: payload.id,
+          page: 1,
+          userId: kits.getCookies('ywj-uid'),
+        }
+      })
+      
+    },
+    *changePage({payload},{call,put}){
+      yield put({
+        type:'updateState',
+        payload:{
+          currentPage: payload.currentPage
+        }
+      })
+      yield put({
+        type:'getComment',
+        payload:{
+          artcleId: payload.id,
+          page: payload.currentPage
+        }
+      })
+    },
+    *queryLikeList({payload},{call,put}){
+      const likeList = yield call(artcleDetailServices.likeUserList,{
+        artcleId: payload.id
+      })
+      yield put({
+        type: 'updateState',
+        payload:{
+          likedUser: likeList.data
+        }
+      })
+    },
+    *submitComment({payload},{call,put}){
+      const result = yield call(artcleDetailServices.submitComment,payload)
+      if(result.code == '000'){
+        Message.success('评论成功')
+        yield put({
+          type:'getComment',
+          payload:{
+            artcleId: payload.artcleId,
+            page: 1,
+            userId: kits.getCookies('ywj-uid'),
+          }
+        })
+      }
+    },
+    *getComment({payload},{call,put}){
+      const result = yield call(artcleDetailServices.getComment,payload)
+      if(result.code == '000'){
+        yield put({
+          type: 'updateState',
+          payload:{
+            comment: result
+          }
+        })
+      }
+    },
     *handleLike({payload},{call,select,put}){
       yield put({
         type:'likeReducer',
         payload:payload
+      })
+      const result = yield call(likeArtcle,{
+        userId: kits.getCookies('ywj-uid'),
+        artcleId: payload.artcleId
+      })
+      if(result.code == '000'){
+        yield put({
+          type:'queryLikeList',
+          payload:{
+            id: payload.artcleId
+          }
+        })
+      }
+    },
+    *handleLikeCom({payload},{call,select,put}){
+      yield put({
+        type:'commentReducer',
+        payload:payload
+      })
+      const result = yield call(likeComment,{
+        commentId: payload.commentId,
+        artcleId: payload.artcleId,
+        userId: kits.getCookies('ywj-uid'),
       })
     }
   },
@@ -325,6 +200,24 @@ export default{
         artcleDetail.like -= 1
       }
       return {...state,...artcleDetail}
+    },
+    commentReducer(state,{payload}){
+      const commentData = state.comment.data.map(item=>{
+        if(item.id == payload.commentId){
+          if(item.isLike){
+            item.likeCommentNum -=1 
+          }else{
+            item.likeCommentNum +=1 
+          }
+          item.isLike = !item.isLike
+          return item
+        }else{
+          return item
+        }
+      })
+      let comment = state.comment
+      comment.data = commentData
+      return {...state,comment}
     },
   }
 }

@@ -9,7 +9,7 @@ const app = dva();
 // app.use({});
 
 // 3. Model
-// app.model(require('./models/common/uploadModel'));
+app.model(require('./models/commonModel'));
 // 4. Router
 app.router(require('./router'));
 

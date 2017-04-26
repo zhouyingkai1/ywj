@@ -147,10 +147,7 @@
       width:720px;
       padding-top:20px;
       background: #fff;
-      position: absolute;
-      left:0;
-      top:0;
-      min-height:100%;
+      min-height:800px;
       .info{
         p{
           display:inline-block;
@@ -182,6 +179,7 @@
         margin-left:110px;
         border-left:2px solid #ddd;
         font-size:16px; 
+        margin-top: 5px;
       }
       .commentMain{
         border-top:1px solid #f1f1f1;
@@ -212,6 +210,48 @@
               border-radius: 50%;
             }
           }
+          .pic{
+            float:left;
+            width:220px;
+            margin-top:15px;
+            position: relative;
+            margin-left:57px;
+            color:#666;
+            
+            input{
+              position: absolute;
+              top:0;
+              left:-70px;
+              z-index:2;
+              opacity: 0;
+              cursor:pointer;
+            }
+            i{
+              cursor:pointer;
+              font-style: normal;
+              &:hover{
+                color:#333;
+              }
+            }
+            .uploadBtn{
+              &:hover{
+                color:#333;
+              }
+            }
+            .picBox{
+              display: inline-block;
+              position: relative;
+              u{
+                position: absolute;
+                right:3px;
+                top:3px;
+              }
+            }
+            img{
+              max-width:100%;
+              display: block;
+            }
+          }
           textarea{
             width:490px;
             margin-left:10px;
@@ -234,6 +274,26 @@
         .commentBox{
           margin-right:40px;
           margin-top:30px;
+          h3{
+            font-weight: normal;
+            color:#666;
+            margin-bottom:5px;
+            padding-bottom:5px;
+            border-bottom:1px solid #f1f1f1;
+            padding-left:5px;
+          }
+          >i{
+            margin-top:30px;
+            text-align: center;
+            font-size:18px;
+            color:#999;
+            font-style: normal;
+            display: block;
+          }
+        }
+        .pagination{
+          margin:20px auto;
+          display: table;
         }
         .commentItem{
           margin-bottom:10px;
@@ -264,6 +324,35 @@
           p{
             padding-left:40px;
             line-height: 2em;
+            img{
+              display: block;
+              max-width:100%;
+              padding:10px;
+            }
+          }
+          h4{
+            display: inline-block;
+            margin-left:40px;
+            padding:3px 6px;
+            background: hsla(0,0%,95%,.8);
+            position: relative;
+            top:-2px;
+            cursor:pointer;
+            color:#909090;
+            font-size:12px;
+            border-radius:2px;
+            &:hover{
+              color:#007fff;
+              background: rgba(0,127,255,.1);
+            }
+            &.act{
+              color:#007fff;
+              background: rgba(0,127,255,.1);
+            }
+            b{
+              margin-left:3px;
+              font-weight: normal;
+            }
           }
         }
       }

@@ -91,7 +91,26 @@ let kits = {
       current = current.offsetParent;
     }
     return {left: actualLeft,top: actualTop};
-  }
+  },
+  getHashStringArgs() {
+    let hashStrings = (window.location.hash.length > 0 ? window.location.hash.substring(1) : "")
+    let hashArgs = {}
+    let items = hashStrings.length > 0 ? hashStrings.slice(hashStrings.indexOf('?')+1,hashStrings.length).split("&") : []
+    let item = null
+    let name = null
+    let value = null
+    let i = 0
+    let len = items.length;
+    for (i = 0; i < len; i++) {
+        item = items[i].split("=");
+        name = decodeURIComponent(item[0]);
+        value = decodeURIComponent(item[1]);
+        if (name.length > 0) {
+            hashArgs[name] = value;
+        }
+    }
+    return hashArgs;
+  } 
 };
 
 module.exports = kits;

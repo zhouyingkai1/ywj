@@ -9,7 +9,7 @@ const Login = (props) => {
     props.form.validateFields((err, values) => {
       if (!err) {
         props.dispatch({
-          type: 'login/login',
+          type: 'ywj/login',
           payload:{...values}
         })
       }
@@ -45,7 +45,7 @@ const Login = (props) => {
                 {getFieldDecorator('passWord', {
                   rules: [{ required: true, message: '请输入正确的密码' }],
                 })(
-                  <Input addonBefore={<Icon type="lock" />} placeholder="请输入密码" />
+                  <Input type='password' addonBefore={<Icon type="lock" />} placeholder="请输入密码" />
                 )}
               </FormItem>
               <Button type="primary" htmlType="submit"  className="login-form-button">

@@ -13,15 +13,21 @@
   }
   &:hover{
     background-color: rgba(248,249,250,.5); 
+    .shortImg{
+      filter:brightness(1.1);
+    }
   }
   .shortImg{
     margin-right: 20px;
-    width: 82px;
-    height: 82px;
+    width: 60px;
+    height: 60px;
     background: 50%/cover;
     background-color: #f8f9fa;
     border-radius: 2px;
     float:left;
+    filter:brightness(1);
+    position: relative;
+    top:17px;
   }
   .itemMain{
     padding: 0;
@@ -49,7 +55,7 @@
       line-height: 32px;
       font-weight: 600;
       letter-spacing: .02em;
-      max-width:450px;
+      max-width:540px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -173,6 +179,7 @@
               transition: all .3s;
               color: rgba(24,37,50,.3);
               line-height: 25px;
+              text-decoration: none;
               &:hover{
                 color: #9f9f9f;
                 border-color: #f1f1f1;

@@ -11,6 +11,6 @@
       "extraBabelPlugins": [
         "transform-runtime"
       ]
-    }
+    },
   }
 }

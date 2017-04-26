@@ -8,7 +8,7 @@ import isEmpty from 'lodash.isempty'
 import Login from './Login'
 import {routerRedux} from 'dva/router'
 const Header = (props) => {
-  const userInfo = JSON.parse(kits.getCookies('__ywjUserInfo__') || '{}');
+  const userInfo = JSON.parse(kits.getCookies('ywjUser') || '{}');
   const openDialog = (type)=>{
    props.dispatch({
      type:'ywj/updateState',
@@ -17,12 +17,18 @@ const Header = (props) => {
      }
   })
  }
+ const loginOut = ()=>{
+   kits.setCookies('ywj-uid', '');
+   kits.setCookies('ywjUser', JSON.stringify({}));
+   Message.success('退出成功')
+   window.location.reload()
+ }
   return (
     <div>
       <div className={styles.header}>
         <div className={styles.headerMain}>
           <div className={styles.logo}>
-            <a href='/'><img src={require('../../assets/logo-m2.png')} alt=""/></a>
+            <a href='/'><img src={require('../../assets/ywj.png')} alt=""/></a>
           </div>
           <div className={styles.search}>
             <Search placeholder="搜索真的可以用 我不骗你"/>
@@ -32,11 +38,31 @@ const Header = (props) => {
             <span onClick={()=>props.dispatch(routerRedux.push('/home'))}>首页</span>
           </div>
           <div className={styles.user}>
-            {!isEmpty(userInfo) && kits.getCookies('ywj-uid') && kits.getCookies('ywj-token') ?
-              <div className='login-btn'>
-                <span>{'欢迎您，' + userInfo.nickname}</span>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span onClick={() => props.onLoginOut()}>退出</span>
+            {!isEmpty(userInfo) && kits.getCookies('ywj-uid')  ?
+              <div className={styles.userInfo}>
+                <div className={styles.avator}>
+                  <p><img src={userInfo.userAvator} alt=""/></p>
+                </div>
+                <div className={styles.menu}>
+                    <ul>
+                      <li>
+                        <Icon type="user" />
+                        <a href={'/#/user/' + kits.getCookies('ywj-uid')}>我的主页</a>
+                      </li>
+                      <li>
+                        <Icon type="heart-o" />
+                        <a href="">我喜欢的</a>
+                      </li>
+                      <li>
+                        <Icon type="tags-o" />
+                        <a href="">标签管理</a>
+                      </li>
+                      <li onClick={()=>loginOut()}>
+                        <Icon type="logout" />
+                        退出登录
+                      </li>
+                    </ul>
+                  </div>
               </div> 
             : 
               <div className={styles.loginBtn}>

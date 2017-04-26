@@ -7,7 +7,7 @@ module.exports = function (webpackConfig, env) {
     libraryName: 'antd',
     style: 'css',
   }]);
-
+   
   webpackConfig.plugins.push(
     new CopyWebpackPlugin([
         { from: __dirname+'/src/favicon.ico', to: 'favicon.ico' },
@@ -46,5 +46,6 @@ module.exports = function (webpackConfig, env) {
       loader.test = /\.css$/;
     }
   });
+  
   return webpackConfig;
 };

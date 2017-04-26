@@ -4,17 +4,11 @@ import {Link} from 'dva/router'
 import { routerRedux } from 'dva/router';
 import moment from 'moment'
 import styles from './style/artcleItem.less'
-const ArtcleItem = (props) => {
-  const clickHeart = (id)=>{
-    props.dispatch({
-      type:'home/handleLike',
-      payload:id
-    })
-  }
- 
-  const item = props.home.artcleList.map((item,index)=>{
+import kits from '../../utils/kits'
+const ArtcleItem = ({dispatch,artcleList,clickHeart}) => { 
+  const item = artcleList.map((item,index)=>{
     let dateStr = new Date().valueOf() + ''
-    let date = (dateStr.substring(0,dateStr.length-3) - (item.createTime-28800))/60
+    let date = (dateStr.substring(0,dateStr.length-3) - (item.createTime-21688))/60
     let day = '';
     if(date<=60){
       day = '刚刚'
@@ -27,12 +21,12 @@ const ArtcleItem = (props) => {
     } 
     const goDetail = (event,id)=>{
        if(/div/.test(event.target.id)){
-         console.log('详情') 
+         window.open('/#/detail?id=' + id)
        }
     }   
     return(
         <div key={index}  className={styles.item} >
-          <div className={styles.shortImg} style={{backgroundImage:'url('+item.shortImg+') '}}>
+          <div className={styles.shortImg} style={{backgroundImage:'url('+item.img+') '}}>
             <a target='_blank' href={item.url} style={{display:'block',position:'relative',zIndex:'3',height:'100%'}}></a>
           </div>
           <div className={styles.itemMain} id={'div' + index} onClick={(event)=>goDetail(event,item.id)}>
@@ -45,9 +39,9 @@ const ArtcleItem = (props) => {
                   <span>{item.like>0?item.like:''}</span>
                 </div>
                 <div className={styles.mess} >
-                  <a target='_blank' href={'/#/detail/' + item.id}>
+                  <a target='_blank' href={'/#/detail?id=' + item.id}>
                     <Icon type="message" />
-                    <span>{item.message>0?item.message:''}</span>
+                    <span>{item.comment>0?item.comment:''}</span>
                   </a>
                 </div>
               </div>  
@@ -56,12 +50,12 @@ const ArtcleItem = (props) => {
                   <Icon type="tags-o" />
                   {item.tags.map((tag,index)=>{
                     return(
-                      <Link key={index} to={'/'+tag.url}>{tag.title}</Link>
+                      <a href={'/#/tags?tag=' + item.items + '-' + tag.id} key={index}>{tag.title}</a>
                     )
                   })}
                 </div> 
                 <div className={styles.avotar}>
-                  <img src={item.user.avator} alt=""/>
+                  <a href={'/#/user/' + item.userId} target='_blank'><img src={item.user.avator} alt=""/></a>  
                 </div>
               </div>
             </div>

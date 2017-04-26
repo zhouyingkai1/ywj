@@ -5,6 +5,7 @@ require('es6-promise').polyfill();
 import pathInterceptor from './pathInterceptor';
 import tokenInterceptor from './tokenInterceptor';
 import $ from 'jquery'
+import kits from './kits'
 function parseJSON(response) {
   return response.text().then(function(text) {
     return text ? JSON.parse(text) : {status: 200}
@@ -55,6 +56,7 @@ export default function request(url, options) {
         headers:{
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'ywjUid': kits.getCookies('ywj-uid')
         },
         dataType: 'json',
         success (data){

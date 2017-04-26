@@ -5,7 +5,7 @@ import {unKnownMenu} from './utils/'
 export default function ({history, app}) {
   const routes = [
     {
-      name: 'ywj',
+      name: 'ywj',  
       path: '/',
       // indexRoute: {
       //   onEnter: (nextState, replace) => replace('/zw/rules')
@@ -58,11 +58,31 @@ export default function ({history, app}) {
         },
         {
           name: 'artcleDetail',
-          path: 'detail/:id',
+          path: 'detail',
           getComponent({}, cb) {
             require.ensure([], require => {
               app.model(require('./models/detailModel'))
               cb(null, require('./routes/artcleDetail/ArtcleDetail'))
+            });
+          }
+        },
+        {
+          name: 'user',
+          path: 'user/:id',
+          getComponent({}, cb) {
+            require.ensure([], require => {
+              app.model(require('./models/userModel'))
+              cb(null, require('./routes/user/User'))
+            });
+          }
+        },
+        {
+          name: 'tags',
+          path: 'tags',
+          getComponent({}, cb) {
+            require.ensure([], require => {
+              app.model(require('./models/tagsModel'))
+              cb(null, require('./routes/tags/Tags'))
             });
           }
         },
@@ -76,6 +96,17 @@ export default function ({history, app}) {
             });
           }
         },
+        {
+          name: 'submitsuccess',
+          path: 'submitsuccess',
+          getComponent({}, cb) {
+            require.ensure([], require => {
+              app.model(require('./models/submitSuccessModel'))
+              cb(null, require('./routes/submitSuccess/SubmitSuccess'))
+            });
+          }
+        },
+        
       ]
     }
   ];
