@@ -1,0 +1,46 @@
+.submitSuccess{
+  padding-top:80px;
+  width:1000px;
+  margin:0 auto;
+  text-align:center;
+  .img{
+    margin:25px 0 20px;
+  }
+  .txt{
+    h2,h3{
+      font-weight: normal
+    }
+    h2{
+      font-size:20px;
+      color:#333;
+    }
+    h3{
+      margin:15px 0 25px;
+    }
+    p{
+      a{
+        display: block;
+        width: 100px;
+        color: #fff;
+        background-color: #40a5ed;
+        line-height: 35px;
+        margin:0 auto 15px;
+        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        border:1px solid #40a5ed;
+        border-radius: 4px;
+        &:hover{
+          background-color: #108ee9;
+          border-color: #108ee9;
+        }
+        &:nth-child(2){
+          color: #333;
+          background-color: transparent;
+          border:1px solid #666;
+          &:hover{
+            background-color: #eee;
+          }
+        }
+      }
+    }
+  }
+}

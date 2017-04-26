@@ -1,0 +1,97 @@
+.tags{
+  padding-top:60px;
+  margin:0 auto;
+  .top{
+    background: #f8f9fa;
+    border-bottom: 1px solid #f1f1f1;
+    background-repeat: no-repeat;
+    background-position:top center;
+    position: relative;
+    &:after{
+      content:'';
+      background: rgba(0,0,0,.5);
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      position: absolute;
+    }
+    .topMain{
+      width:1000px;
+      margin: 0 auto;
+      padding:20px 0 30px;
+      color:#fff;
+      position: relative;
+      z-index:10;
+      &:after{
+        content:'';
+        display: block;
+        clear:both;
+      }
+      .right{
+        text-align: center;
+        h2{
+          font-size:22px;
+          margin:10px 0;
+        }
+        h2,h3{
+          display: inline-block;
+          font-weight: normal;
+        }
+        h3{
+          margin-left:10px;
+          font-size:20px;
+          
+        }
+        .number{
+          margin-bottom:10px;
+          u{
+            text-decoration: none;
+            margin-right:10px;
+          }
+        }
+      }
+      .likeBtn{
+        display: block;
+        margin:0 auto;
+        color:#fff;
+        border-color:#fff;
+        background: transparent;
+        &:hover,&.act{
+          color:#fff;
+          background: #37c700;
+          border-color: #37c700;
+        }
+      }
+    }
+  }
+  .artcleList{
+    margin:10px auto;
+    width:1000px;
+    .sort{
+      li{
+        display: inline-block;
+        margin-right:20px;
+        font-size:15px;
+        color:#333;
+        cursor:pointer;
+        &.act{
+          color:#007fff;
+        }
+      }
+    }
+    .listMain{
+      background: #fff;
+      padding:20px 0;
+      margin-top:10px;
+      .pagination{
+        margin:20px auto 0;
+        display: table;
+      }
+      .empty{
+        text-align: center;
+        padding:40px;
+      }
+    }
+  }
+}
